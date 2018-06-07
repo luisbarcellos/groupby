@@ -22,19 +22,29 @@ public class Main {
     }
 
     private static void run(){
-         Produto produto1 = new Produto("barra chocolate", BigDecimal.valueOf(5.99), "300g");
-        Produto produto2 = new Produto("barra pequena chocolate", BigDecimal.valueOf(2), "100g");
-        Produto produto3 = new Produto("sorvete", BigDecimal.valueOf(5.99), "1L");
-        Produto produto4 = new Produto("barra chocolate", BigDecimal.valueOf(6), "1L");
+        Fornecedor fornecedor = new Fornecedor("Nestle", "33174582", "Rua Amapá, 35");
+        Fornecedor fornecedor2 = new Fornecedor("Garoto", "44568799", "Rua Brasil, 44");
+         Produto produto1 = new Produto("barra chocolate", BigDecimal.valueOf(5.99), "300g", fornecedor2);
+        Produto produto2 = new Produto("barra pequena chocolate", BigDecimal.valueOf(2), "100g", fornecedor);
+        Produto produto3 = new Produto("sorvete", BigDecimal.valueOf(5.99), "1L", fornecedor2);
+        Produto produto4 = new Produto("barra chocolate", BigDecimal.valueOf(6), "1L", fornecedor);
 
         List<Produto> produtoList = Arrays.asList(produto1, produto2, produto3, produto4);
 
-        Map<BigDecimal, List<Produto>> result =
+        Map<BigDecimal, List<Produto>> collectByPreco =
                 produtoList.stream().collect(
                         Collectors.groupingBy(Produto::getPreco));
 
+        Map<Fornecedor, List<Produto>> collectByFornecedor =
+                produtoList.stream().collect(
+                        Collectors.groupingBy(Produto::getFornecedor));
+
         System.out.println("\n#########################");
-        System.out.println(result);
+        System.out.println(collectByPreco);
+        System.out.println("#########################\n");
+
+        System.out.println("\n#########################");
+        System.out.println(collectByFornecedor);
         System.out.println("#########################\n");
     }
 }

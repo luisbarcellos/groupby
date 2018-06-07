@@ -11,4 +11,5 @@ public class Produto {
     private String nome;
     private BigDecimal preco;
     private String peso;
+    private Fornecedor fornecedor;
 }
